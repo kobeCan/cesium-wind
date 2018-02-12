@@ -2,6 +2,8 @@ import Windy from './js/windy/Windy';
 import Strom from './js/strom/Strom';
 import $ from 'jquery';
 
+var viewer = new Cesium.Viewer('cesiumContainer');
+
 var czml = [{
     "id" : "document",
     "name" : "CZML Polygon - Intervals and Availability",
@@ -53,32 +55,19 @@ var czml = [{
     }
 }];
 
-var strom = new Strom([120, 20], 1, .5);
-var path = strom.forecastPath(10);
 
 
-function animateStrom () {
-    var polyline = new Cesium.PolylineGeometry({
-         positions : Cesium.Cartesian3.fromDegreesArray(path[0].concat(path[1])),
-         colors: [Cesium.Color.WHITE, Cesium.Color.WHITE.withAlpha(0)],
-         width: 1.5,
-         colorsPerVertex: true
-    });
-    viewer.scene.primitives.add(new Cesium.Primitive({
-        geometryInstances: [new Cesium.GeometryInstance({
-            geometry: polyline
-        })],
-        appearance: new Cesium.PolylineColorAppearance({
-            translucent: true
-        })
-    }))
-}
-
-var viewer = new Cesium.Viewer('cesiumContainer');
+/* 1. CZML 龙卷移动轨迹 （效果不满意） */
 // viewer.dataSources.add(Cesium.CzmlDataSource.load(czml));
-var windy, lastTime;
-animateStrom();
+
+/* 2. 动态风场 */
 // reqDynamicWind();
+
+/* 3. 龙卷移动轨迹 */
+var strom = new Strom(120, 20, 25, 50, 50000, 3);
+strom.animate(viewer);
+
+var windy;
 function reqDynamicWind () {
     $.ajax({
         type: "get",
@@ -91,7 +80,6 @@ function reqDynamicWind () {
                 destination: Cesium.Rectangle.fromDegrees(header['lo1'], header['la2'], header['lo2'], header['la1'])
             });
             windy = new Windy(response, viewer);
-            lastTime = new Date().getTime();
             redraw();
         },
         error: function (errorMsg) {
@@ -101,17 +89,11 @@ function reqDynamicWind () {
 }
 
 var timer = null;
-function redraw() {
-    // var curTime = new Date().getTime();
-    // if ( curTime - lastTime > 100) {
-    //     windy.animate();
-    //     lastTime = curTime;
-    // }
 
+function redraw() {
     timer = setInterval(function () {
         windy.animate();
     }, 100);
-    // Cesium.requestAnimationFrame(redraw);
 }
 
 function createRect (west, south, east, north) {
