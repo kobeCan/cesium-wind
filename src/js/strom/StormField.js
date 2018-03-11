@@ -2,11 +2,11 @@
  * direction degree
  * speed m/s
  **/
- import Strom from './Strom'
+ import Strom from './Storm'
 
 const TIME_RATE = 300;
 const LINE_LENGTH_RATE = 10;
-const StromField = function (viewer, data, options) {
+const StormField = function (viewer, data, options) {
 	this._primitives = viewer.scene.primitives;
 	this.data = data;
 	this.forecastTime = options.forecastTime * 60 * 60;
@@ -16,8 +16,8 @@ const StromField = function (viewer, data, options) {
 	this._init();
 }
 
-StromField.prototype = {
-	constructor: Strom,
+StormField.prototype = {
+	constructor: StormField,
 	_init: function () {
 			this._createField();
 	},
@@ -99,4 +99,4 @@ StromField.prototype = {
 	}
 }
 
-export default StromField
+export default StormField

@@ -1,5 +1,5 @@
 import Windy from './js/windy/Windy';
-import StromField from './js/strom/StromField';
+import StormField from './js/strom/StormField';
 import $ from 'jquery';
 
 var viewer = new Cesium.Viewer('cesiumContainer', {
@@ -76,10 +76,10 @@ var data = [{
     speed: 15,
     direction: 269
 }];
-var stromField = new StromField(viewer, data, {
+var stormField = new StormField(viewer, data, {
     forecastTime: 1
 });
-stromField.animate();
+stormField.animate();
 
 var windy;
 function reqDynamicWind () {
