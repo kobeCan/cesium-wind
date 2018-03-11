@@ -1,8 +1,14 @@
 import Windy from './js/windy/Windy';
-import Strom from './js/strom/Strom';
+import StromField from './js/strom/StromField';
 import $ from 'jquery';
 
-var viewer = new Cesium.Viewer('cesiumContainer');
+var viewer = new Cesium.Viewer('cesiumContainer', {
+    imageryProvider: Cesium.createTileMapServiceImageryProvider({
+        url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    }),
+    geocoder: false,
+    baseLayerPicker: false,
+});
 
 var czml = [{
     "id" : "document",
@@ -64,8 +70,16 @@ var czml = [{
 // reqDynamicWind();
 
 /* 3. 龙卷移动轨迹 */
-var strom = new Strom(120, 20, 25, 50, 50000, 3);
-strom.animate(viewer);
+var data = [{
+    x: 120.3077,
+    y: 31.0539,
+    speed: 15,
+    direction: 269
+}];
+var stromField = new StromField(viewer, data, {
+    forecastTime: 1
+});
+stromField.animate();
 
 var windy;
 function reqDynamicWind () {
