@@ -2,7 +2,7 @@
  * direction degree
  * speed m/s
  **/
- import Strom from './Storm'
+ import Storm from './Storm'
 
 const TIME_RATE = 300;
 const LINE_LENGTH_RATE = 10;
@@ -24,7 +24,7 @@ StormField.prototype = {
 	_createField: function () {
 		var storms = [];
 		this.data.forEach(function (item) {
-			var storm = new Strom(item.x, item.y, item.speed, item.direction);
+			var storm = new Storm(item.x, item.y, item.speed, item.direction);
 			storm.path = [
 				storm.x, 
 				storm.y, 
