@@ -1,5 +1,5 @@
 import Windy from './js/windy/Windy';
-import StormField from './js/strom/StormField';
+import StormField from './js/storm/StormField';
 import $ from 'jquery';
 
 var viewer = new Cesium.Viewer('cesiumContainer', {
