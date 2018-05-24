@@ -12,10 +12,23 @@
 			padding: 0;
 			position: relative;
 		}
+
+		.bts {
+			padding: 10px;
+			background-color: rgba(0, 0, 0, .7);
+			position: absolute;
+			top: 50px;
+			left: 50px;
+		}
 	</style>
 	<script src="./Cesium/Cesium.js"></script>
 </head>
 <body>
 	<div id="cesiumContainer"></div>
+	<div class="bts">
+		<button type="button" id="grid">格网数据</button>
+		<button type="button" id="czml">CZML模拟</button>
+		<button type="button" id="storm">单点龙卷轨迹模拟</button>
+	</div>
 </body>
 </html>

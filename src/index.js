@@ -63,23 +63,33 @@ var czml = [{
 
 
 
+const g = function (id) {
+  return document.getElementById(id);
+}
 /* 1. CZML 龙卷移动轨迹 （效果不满意） */
-// viewer.dataSources.add(Cesium.CzmlDataSource.load(czml));
+g('czml').onclick = function () {
+  viewer.dataSources.add(Cesium.CzmlDataSource.load(czml));
+}
 
 /* 2. 动态风场 */
-// reqDynamicWind();
+g('grid').onclick = function () {
+  reqDynamicWind();
+}
 
 /* 3. 龙卷移动轨迹 */
-var data = [{
-    x: 120.3077,
-    y: 31.0539,
-    speed: 15,
-    direction: 269
-}];
-var stormField = new StormField(viewer, data, {
-    forecastTime: 1
-});
-stormField.animate();
+g('storm').onclick = function () {
+  var data = [{
+      x: 120.3077,
+      y: 31.0539,
+      speed: 15,
+      direction: 269
+  }];
+  var stormField = new StormField(viewer, data, {
+      forecastTime: 1
+  });
+  stormField.animate();
+}
+
 
 var windy;
 function reqDynamicWind () {
