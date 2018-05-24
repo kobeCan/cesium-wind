@@ -3,11 +3,23 @@ implement dynamic wind in Cesium
 
 
 ## 示例
-![Web Assembly Logo presentation - Carlos Baraza](./imgs/grid_wind.png)
+![格网风场](./imgs/grid_wind.gif)
 
 ## 数据源
+你从[index.js](./src/index.js)中可以看到我使用的是[uvwind_d01.json](./src/data/uvwind_d01.json)数据。
+数据可以按照你的方式进行组织，只要方便读取，我只解释下这个数据的格式。
 
 
+风场数据由风速X分量和Y分量组成，每个分量格式都是一致的：
+
+* data (Array)
+当前分量每个格点的风速大小(m/s)。
+
+* header (Object)
+描述风场信息是如何组织的
+
+* meta (Object)
+描述风场的一些基本信息，如日期等。
 
 ## 方法
 
