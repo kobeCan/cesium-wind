@@ -1,3 +1,7 @@
+# 这种实现方式效率太低了
+# This implementation is too inefficient
+
+
 # cesium-wind
 implement dynamic wind in Cesium
 
